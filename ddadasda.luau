@@ -130,7 +130,7 @@ outlineContentFrame.Color = Color3.fromRGB(31,81,178)
 outlineContentFrame.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
 
 -- Tab System
-local _TABS = {"Main","Teleport","Visual","Hitbox","Inventory","Misc","UI Settings"}
+local _TABS = {}
 local sidebarButtons, tabSections, tabCallbacks = {}, {}, {}
 local DEFAULT_COLOR, ACTIVE_COLOR = Color3.fromRGB(210,210,210), Color3.fromRGB(255,255,255)
 local DEFAULT_SIZE, ACTIVE_SIZE = 16, 18
@@ -615,7 +615,7 @@ do
     themeList.BorderSizePixel= 0
     themeList.Visible        = false
     Instance.new("UICorner", themeList).CornerRadius = UDim.new(0,4)
-
+ 
     for i, name in ipairs(themeNames) do
         local opt = Instance.new("TextButton", themeList)
         opt.Size              = UDim2.new(1, 0, 0, 28)
@@ -633,6 +633,18 @@ do
             themeList.Visible = false
         end)
     end
+
+function Eps1llonUI:AddTab(name)
+    assert(not tabSections[name], "Tab '"..name.."' already exists.")
+    table.insert(_TABS, name)
+    local idx = #_TABS
+    tabSections[name] = createSection(name)
+    createSidebarButton(name, 10 + (idx-1)*35, idx)
+    if idx == 1 then
+        tabSections[name].Visible = true
+        setButtonActive(1)
+    end
+end
 
     themeBtn.MouseButton1Click:Connect(function()
         themeList.Visible = not themeList.Visible
