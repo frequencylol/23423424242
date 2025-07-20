@@ -211,6 +211,23 @@ local function createSidebarButton(text, y, idx)
     return frame
 end
 
+function Eps1llonUI:AddTab(name)
+    assert(name and type(name) == "string", "Invalid tab name")
+    if tabSections[name] then return end
+
+    table.insert(_TABS, name)
+    local idx = #_TABS
+
+    tabSections[name] = createSection(name)
+    createSidebarButton(name, 10 + (idx-1)*35, idx)
+
+    -- If it's the first tab, auto-select it
+    if idx == 1 then
+        tabSections[name].Visible = true
+        setButtonActive(1)
+    end
+end
+
 -- MODERN BUTTON
 function Eps1llonUI:AddButton(tab, opts)
     local sec = tabSections[tab]
