@@ -211,13 +211,6 @@ local function createSidebarButton(text, y, idx)
     return frame
 end
 
-for i,name in ipairs(_TABS) do
-    tabSections[name] = createSection(name)
-    createSidebarButton(name, 10 + (i-1)*35, i)
-end
-tabSections[_TABS[1]].Visible = true
-setButtonActive(1)
-
 -- MODERN BUTTON
 function Eps1llonUI:AddButton(tab, opts)
     local sec = tabSections[tab]
