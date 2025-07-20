@@ -219,12 +219,12 @@ function Eps1llonUI:AddTab(name)
     local idx = #_TABS
 
     tabSections[name] = createSection(name)
-    createSidebarButton(name, 10 + (idx-1)*35, idx)
+    createSidebarButton(name, 10 + (idx - 1) * 35, idx)
 
-    -- If it's the first tab, auto-select it
+    -- Automatically select first tab
     if idx == 1 then
         tabSections[name].Visible = true
-        setButtonActive(1)
+        setButtonActive(idx)
     end
 end
 
